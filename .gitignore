@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+*.egg-info/
+
+# Organizer-provided data bundle — input, not part of our solution (place candidates.jsonl here to run).
+challenge_data/
+
+# Large precomputed embedding matrix (~153MB) is regenerable via precompute.py — not committed.
+# We DO commit the small artifacts: jd_embedding.npy, cand_ids.json, features.npz, precompute_meta.json.
+artifacts/cand_embeddings.npy
+
+# Scratch / regenerable analysis dumps (keep the methodology .md + EDA scripts).
+_extract_docx.py
+_extract_pdf.py
+idea_template.txt
+analysis/samples.json
+analysis/sample.jsonl
+analysis/sample_*.csv
+analysis/sample_test*.csv
+analysis/top100_records.json
+analysis/top100_debug.csv

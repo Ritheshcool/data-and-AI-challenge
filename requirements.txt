@@ -1,0 +1,10 @@
+# Redrob ranker — pinned to the versions verified on the dev machine.
+# Ranking step (rank.py) needs only numpy; sentence-transformers/torch are used
+# ONLY by the offline precompute step. faiss is optional (brute-force numpy cosine
+# over 100k x 384 is well under budget) and kept for the sandbox demo.
+numpy==2.2.6
+scikit-learn==1.7.2
+PyYAML==6.0.2
+sentence-transformers==5.1.1
+torch==2.6.0
+faiss-cpu==1.11.0
