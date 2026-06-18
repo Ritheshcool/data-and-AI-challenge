@@ -1,0 +1,11 @@
+{
+  "model": "BAAI/bge-small-en-v1.5",
+  "dim": 384,
+  "n": 100000,
+  "max_seq_length": 96,
+  "text_recipe": "headline + summary + [title at company: description]*; skills excluded",
+  "jd_query_text": "Senior AI Engineer for a product company's intelligence layer: ranking, retrieval, and matching systems. Production experience with embeddings-based retrieval (sentence-transformers, BGE, E5), vector databases and hybrid search (FAISS, Pinecone, Qdrant, Milvus, Elasticsearch, OpenSearch), learning-to-rank and recommendation systems, and rigorous ranking evaluation (NDCG, MRR, MAP, offline-to-online, A/B testing). Strong Python. 5-9 years, mostly applied ML/AI at product companies, having shipped an end-to-end search, ranking, or recommendation system to real users at scale. Not pure research, not framework-tutorial demos, not keyword-only profiles.",
+  "bge_query_instruction": "Represent this sentence for searching relevant passages: ",
+  "load_secs": 7.3,
+  "encode_secs": 2133.9
+}

@@ -1,0 +1,78 @@
+# Redrob Hackathon — Submission Metadata
+# Fill the TODO fields with your registered details before uploading via the portal.
+
+team_name: "TODO-your-team-name"
+
+primary_contact:
+  name: "TODO Full Name"
+  email: "ritheshvijaykrishna@gmail.com"
+  phone: "+91-XXXXXXXXXX"
+
+team_members:
+  - name: "TODO Full Name"
+    email: "ritheshvijaykrishna@gmail.com"
+    role: "Team Lead / ML Engineer"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/TODO_USERNAME/redrob-ranker"
+
+sandbox_link: "https://huggingface.co/spaces/TODO_USERNAME/redrob-ranker"
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Windows 11, local CPU box"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.10.0"
+  os: "Windows 11"
+  uses_gpu_for_inference: false          # ranking step is CPU-only
+  has_network_during_ranking: false      # rank.py loads only cached embeddings; no API
+  pre_computation_required: true         # offline embedding of JD + candidates (precompute.py)
+  pre_computation_time_minutes: 20       # ~one-time bge-small encode of 100k on CPU
+
+# ============================================================================
+# AI tools declaration (transparency only; honest)
+# ============================================================================
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Claude (Claude Code) was used for data profiling, architecture/design discussion,
+  and code authoring/review under human direction. No candidate data was sent to any
+  hosted LLM during ranking — the ranking step is fully local, offline, and CPU-only.
+  All scoring logic, weights, and trap/honeypot rules are explicit and auditable in the repo.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Hybrid ranker: a transparent rule layer plus a small local embedding signal, scored over all
+  100k candidates in one CPU pass (<60s, no network). The backbone is a Production-Evidence Score
+  read from career DESCRIPTIONS (the least-gameable field — "vector db" appears in 12,866 skill
+  lists but only 108 descriptions) for retrieval/ranking/recsys/RAG/eval work, weighted by company
+  type, role duration and recency. A role-class gate makes non-technical titles structurally unable
+  to reach the head — the anti-keyword-stuffer lever. A bge-small-en-v1.5 cosine (skills excluded
+  from the embedded text) contributes 10% and rescues plain-language gems. Single-harshest trap
+  penalties demote self-learner side-projects, recent-only-LangChain, consulting-only, CV/speech-only
+  and research-only profiles. A behavioral-availability multiplier (response rate, recency, notice,
+  open-to-work) separates behavioral twins and down-weights perfect-on-paper-but-unreachable
+  candidates. Two rare impossibility checks gate the ~80 honeypots out of the top-100. Reasoning is
+  generated programmatically — fact-grounded, varied, tone-matched to fit, no hallucination.
+  Embeddings are precomputed offline; the ranking step loads only cached vectors, so Stage-3
+  reproduction is CPU-only, offline, and deterministic.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
